@@ -1,0 +1,14 @@
+<section class="default">
+    <h1>CalcGuesser</h1>
+    <form sui-form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <p class="question">The result of <span>{{num1}} + {{num2}}</span> is: </p>
+        <input type="text" formControlName="answer" placeholder="answer">
+    </form>
+
+    <p class="status">{{status}}</p>
+
+    <div class="scores">
+        <p>Correct: <span>{{correct}}</span></p>
+        <p>Wrong: <span>{{wrong}}</span></p>
+    </div>
+</section>

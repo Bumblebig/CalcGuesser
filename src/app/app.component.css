@@ -1,0 +1,40 @@
+.default {
+  max-width: 700px;
+  padding: 0px 20px;
+  margin: 80px auto;
+}
+
+h1 {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 20px;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.question {
+  min-width: 250px;
+}
+
+span {
+  font-weight: 600;
+}
+
+.scores {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.status {
+  font-size: 25px;
+  text-align: center;
+}
