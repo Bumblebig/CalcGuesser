@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgxSemanticModule } from "ngx-semantic";
@@ -9,7 +9,7 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet, CommonModule, ReactiveFormsModule, NgxSemanticModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'CalcGuess';
@@ -19,8 +19,9 @@ export class AppComponent {
   correct: number = 0;
   wrong: number = 0;
   status!: string | null;
+  resetMessage!: string | null;
 
-  constructor(private fb:FormBuilder) {
+  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     this.form = this.fb.group({
       answer: ['', Validators.required]
     });
@@ -30,7 +31,7 @@ export class AppComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      const {answer} = this.form.value;
+      const { answer } = this.form.value;
 
       if (this.checkSum(answer)) {
         this.correct++;
@@ -39,8 +40,9 @@ export class AppComponent {
         this.wrong++;
         this.status = 'Wrong';
       }
-      
-      setTimeout(() => this.reset(), 3000);
+
+      this.resetText();
+      setTimeout(() => this.reset(), 5000);
     }
   }
 
@@ -54,8 +56,19 @@ export class AppComponent {
 
   private reset(): void {
     this.num1 = this.getRandom();
-    this.num2 = this.getRandom()
+    this.num2 = this.getRandom();
     this.status = null;
     this.form.reset();
+    this.resetMessage = null;
+  }
+
+  private resetText(): void {
+    let time = 4;
+    const message = setInterval(() => {
+      this.resetMessage = `The question will reset in ${time}...`;
+      time--;
+      if (time == 0) clearInterval(message);
+      this.cd.detectChanges();
+    }, 1000);
   }
 }
