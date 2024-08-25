@@ -19,7 +19,10 @@ export class AppComponent {
   correct: number = 0;
   wrong: number = 0;
   status!: string | null;
+  statusClass: string  = 'default';
   resetMessage!: string | null;
+  disabled: boolean = false;
+
 
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     this.form = this.fb.group({
@@ -30,15 +33,18 @@ export class AppComponent {
   ngOnInit() {}
 
   onSubmit() {
-    if (this.form.valid) {
+    if (this.form.valid && !this.disabled) {
+      this.disabled = true;
       const { answer } = this.form.value;
 
       if (this.checkSum(answer)) {
         this.correct++;
         this.status = 'Correct!';
+        this.statusClass = 'correct';
       } else {
         this.wrong++;
         this.status = 'Wrong';
+        this.statusClass = 'wrong';
       }
 
       this.resetText();
@@ -47,7 +53,7 @@ export class AppComponent {
   }
 
   private getRandom(): number {
-    return Math.floor(Math.random() * 10);
+    return Math.floor((Math.random() * 10) + 1);
   }
 
   private checkSum(answer: string): boolean {
@@ -58,8 +64,10 @@ export class AppComponent {
     this.num1 = this.getRandom();
     this.num2 = this.getRandom();
     this.status = null;
+    this.statusClass = 'default';
     this.form.reset();
     this.resetMessage = null;
+    this.disabled = false;
   }
 
   private resetText(): void {

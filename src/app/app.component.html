@@ -1,15 +1,17 @@
-<section class="default">
-    <h1>CalcGuesser</h1>
-    <form sui-form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <p class="question">The result of <span>{{num1}} + {{num2}}</span> is: </p>
-        <input type="number" formControlName="answer" placeholder="answer">
-    </form>
+<section class="{{statusClass}} block--container">
+    <div class="container">
+        <h1>CalcGuesser</h1>
+        <form sui-form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <p class="question">The result of <span>{{num1}} + {{num2}}</span> is: </p>
+            <input type="number" formControlName="answer" placeholder="answer">
+        </form>
 
-    <p class="status">{{status}}</p>
-    <div class="scores">
-        <p>Correct: <span>{{correct}}</span></p>
-        <p>Wrong: <span>{{wrong}}</span></p>
+        <p class="status">{{status}}</p>
+        <div class="scores">
+            <p>Correct: <span>{{correct}}</span></p>
+            <p>Wrong: <span>{{wrong}}</span></p>
+        </div>
+
+        <p class="reset">{{resetMessage}}</p>
     </div>
-
-    <p class="reset">{{resetMessage}}</p>
 </section>
