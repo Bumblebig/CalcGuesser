@@ -39,11 +39,11 @@ export class AppComponent {
 
       if (this.checkSum(answer)) {
         this.correct++;
-        this.status = 'Correct!';
+        this.status = 'Correct!🥳🥳🥳';
         this.statusClass = 'correct';
       } else {
         this.wrong++;
-        this.status = 'Wrong';
+        this.status = 'Wrong!😑😑😑';
         this.statusClass = 'wrong';
       }
 
